@@ -1,15 +1,19 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace Utilitarios
 {
-    public static class Valida
+    /// <summary>
+    /// Classe utilitária com métodos para efetuar validações
+    /// </summary>
+    public static class UtlValida
     {
         /// <summary>
         /// Verifica se um digito informado é um numero
         /// </summary>
         /// <param name="numero">string com um caracter para verificar se é um numero</param>
         /// <returns>Boolean True/False</returns>
-        public static Boolean IsNumero(string numero)
+        public static bool IsNumero(string numero)
         {
             int n;
             return Int32.TryParse(numero, out n);
@@ -20,7 +24,7 @@ namespace Utilitarios
         /// </summary>
         /// <param name="cpf">Int64 com o numero CPF completo com Digito</param>
         /// <returns>Boolean True/False onde True=Digito CPF Valido</returns>
-        public static Boolean CPF(Int64 cpf)
+        public static bool CPF(Int64 cpf)
         {
             return CPF(cpf.ToString("D11"));
         }
@@ -30,7 +34,7 @@ namespace Utilitarios
         /// </summary>
         /// <param name="cpf">string com o numero CPF completo com Digito</param>
         /// <returns>Boolean True/False onde True=Digito CPF Valido</returns>
-        public static Boolean CPF(string cpf)
+        public static bool CPF(string cpf)
         {
             if (string.IsNullOrEmpty(cpf.Trim()))
                 return false;
@@ -69,7 +73,7 @@ namespace Utilitarios
         /// </summary>
         /// <param name="cnpj">Int64 com o numero CNPJ completo com Digito</param>
         /// <returns>Boolean True/False onde True=Digito CNPJ Valido</returns>
-        public static Boolean CNPJ(Int64 cnpj)
+        public static bool CNPJ(Int64 cnpj)
         {
             return CNPJ(cnpj.ToString("D14"));
         }
@@ -79,7 +83,7 @@ namespace Utilitarios
         /// </summary>
         /// <param name="cnpj">string com o numero CNPJ completo com Digito</param>
         /// <returns>Boolean True/False onde True=Digito CNPJ Valido</returns>
-        public static Boolean CNPJ(string cnpj)
+        public static bool CNPJ(string cnpj)
         {
             if (string.IsNullOrEmpty(cnpj))
                 return false;
@@ -113,6 +117,32 @@ namespace Utilitarios
             return false;
         }
 
+        /// <summary>
+        /// Verifica se é uma URL válida
+        /// </summary>
+        /// <param name="url">string com url a ser validada</param>
+        /// <returns>true se for válido, false do contrário</returns>
+        public static bool URL(string url)
+        {            
+            var match = Regex.Match(url, @"^((http|https)://)?([\w-]+\.)+[\w]+(/[\w- ./?]*)?$", RegexOptions.IgnoreCase);
+            return match.Success;            
+        }
+
+        /// <summary>
+        /// Verifica se é um e-mail Válido
+        /// </summary>
+        /// <param name="email">string com e-mail a ser verificado</param>
+        /// <returns>true se for válido, false caso contrário</returns>
+        public static bool Email(string email)
+        {   
+            Regex regExpEmail = new Regex("^[A-Za-z0-9](([_.-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([.-]?[a-zA-Z0-9]+)*)([.][A-Za-z]{2,4})$");
+            Match match = regExpEmail.Match(email);
+
+            if (match.Success)
+                return true;
+            else
+                return false;            
+        }
 
         /// <summary>
         /// Calcula o Digito verificador de um CPF informado  
