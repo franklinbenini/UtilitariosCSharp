@@ -38,6 +38,9 @@ namespace Utilitarios
         {
             if (string.IsNullOrEmpty(cpf.Trim()))
                 return false;
+            
+            if (!Regex.IsMatch(cpf, @"^\d{9}$"))
+                return false;
 
             string new_cpf = "";
             for (int i = 0; i < cpf.Length; i++)
@@ -86,6 +89,9 @@ namespace Utilitarios
         public static bool CNPJ(string cnpj)
         {
             if (string.IsNullOrEmpty(cnpj))
+                return false;
+            
+            if (!Regex.IsMatch(cpf, @"^\d{9}$"))
                 return false;
 
             string new_cnpj = "";                        
