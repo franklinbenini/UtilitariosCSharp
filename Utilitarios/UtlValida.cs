@@ -39,7 +39,7 @@ namespace Utilitarios
             if (string.IsNullOrEmpty(cpf.Trim()))
                 return false;
             
-            if (!Regex.IsMatch(cpf, @"^\d{9}$"))
+            if (!Regex.IsMatch(cpf, @"^[0-9]+$"))
                 return false;
 
             string new_cpf = "";
@@ -91,7 +91,7 @@ namespace Utilitarios
             if (string.IsNullOrEmpty(cnpj))
                 return false;
             
-            if (!Regex.IsMatch(cnpj, @"^\d{9}$"))
+            if (!Regex.IsMatch(cnpj, @"^[0-9]+$"))
                 return false;
 
             string new_cnpj = "";                        
