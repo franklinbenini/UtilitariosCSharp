@@ -91,7 +91,7 @@ namespace Utilitarios
             if (string.IsNullOrEmpty(cnpj))
                 return false;
             
-            if (!Regex.IsMatch(cpf, @"^\d{9}$"))
+            if (!Regex.IsMatch(cnpj, @"^\d{9}$"))
                 return false;
 
             string new_cnpj = "";                        
